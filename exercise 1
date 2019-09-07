@@ -1,0 +1,39 @@
+library(tidyverse)
+library(ggthemes)
+library(psych)
+
+iris
+dado<-iris
+class(iris)
+#informacoes gerais
+
+
+summary(dado)
+describe(dado)
+
+view(dado)
+str(dado)
+
+?iris
+
+#correlacao dos dados
+
+cor(dado[,1:4])
+
+attach(dado)
+cor.test(Petal.Width,Petal.Length)
+cor.test(Sepal.Length,Petal.Length)
+cor.test(Petal.Width,Sepal.Length)
+
+require(gridExtra)
+
+plot1=ggplot(dado,aes(x=Sepal.Length,y=Petal.Length,color=Species))+geom_point()+stat_smooth(se=F,method = "lm",color="red")+
+  theme_few()+labs(x="Comprimento da sépala",y="Comprimento da pétala",color="Espécies")  
+
+plot2=ggplot(dado,aes(x=Sepal.Length,y=Petal.Width,color=Species))+geom_point()+stat_smooth(se=F,method = "lm",color="red")+
+  theme_few()+labs(x="Comprimento da sépala",y="Largura da pétala",color="Espécies")
+
+plot3=ggplot(dado,aes(x=Petal.Length,y=Petal.Width,color=Species))+geom_point()+stat_smooth(se=F,method = "lm",color="red")+
+  theme_few()+labs(x="Comprimento da pétala",y="Largura da pétala",color="Espécies")
+
+grid.arrange(plot1,plot2,plot3,ncol=2)
