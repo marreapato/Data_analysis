@@ -37,3 +37,73 @@ plot3=ggplot(dado,aes(x=Petal.Length,y=Petal.Width,color=Species))+geom_point()+
   theme_few()+labs(x="Comprimento da pétala",y="Largura da pétala",color="Espécies")
 
 grid.arrange(plot1,plot2,plot3,ncol=2)
+
+
+
+
+
+
+
+
+###############################################
+
+
+x<-c(1:4)
+y<-c(0:3)
+z<-c(3,4)
+x+y
+y-z
+y/x
+sqrt(y)
+exp(y)
+log(x)-cos(y)
+prim<-c(2,3,5,7,11)
+prim2<-c(13,17,23)
+primfin<-c(prim,prim2)
+primfin
+x<-c(25:1)
+x
+seq(1,10,by=2)
+#ordenacao
+x<-c(seq(1,25,by=3))
+k=NULL
+j=length(x)
+for (i in 1:length(x)){
+  
+  j = i
+  
+  while((j>1)){
+    if ((x[j]>x[j-1])){
+      temp = x[j]
+      x[j] = x[j-1]
+      x[j-1] = temp
+    }
+    j = j-1
+  }
+  
+}
+x
+#decrescendo
+x=x[order(x,decreasing = T)]
+x
+################################################################################################
+
+rep(1,10)
+rep(c(1,2),12)
+rep(c(0,1),10)
+is.prime <- function(num) {
+  if (num == 2) {
+    TRUE
+  } else if (any(num %% 2:(num-1) == 0)) {
+    FALSE
+  } else { 
+    TRUE
+  }
+}
+is.prime(4)
+rep(c("A","B"),5)
+
+
+
+
+
