@@ -103,6 +103,18 @@ is.prime <- function(num) {
 is.prime(4)
 rep(c("A","B"),5)
 
+x<-c(-3:3)
+y<-c(2,5,-6,3,-2,10,-4)
+z<-cbind(x,y) 
+rowMeans(z)
+max(z)
+min(z[,2])
+library(tidyverse)
+######################################################################
+#sem tidyverse
+mat <- matrix(c(x,y),ncol = 2)
+mat
+mean(z)
 
 
 
