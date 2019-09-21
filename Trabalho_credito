@@ -229,4 +229,22 @@ g6 <- ggplot(data = dados1)+###3
   theme_bw()
 g6
 ########
+library(tidyverse)
+
+dados2<-as.tibble(dados2)
+str(dados2)#checando a estrutura
+
+#separando sexo e estado civil
+
+dados2<-dados2 %>%separate(`Sexo/estado.civil`,into = c("Sexo","Estado civil"),sep=":")
+
+
+
+
+
+
+
+
+
+
 
