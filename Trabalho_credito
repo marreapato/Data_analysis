@@ -238,9 +238,9 @@ str(dados2)#checando a estrutura
 
 dados2<-dados2 %>%separate(`Sexo/estado.civil`,into = c("Sexo","Estado civil"),sep=":")
 
+library(ggthemes)
 
-
-
+ggplot(dados2,aes(fill=dados2$Sexo,x=dados2$inadimplencia))+geom_bar(position = "dodge")
 
 
 
