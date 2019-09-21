@@ -1,3 +1,4 @@
+
 library(tidyverse)
 library(readxl)
 library(lubridate)
@@ -217,17 +218,6 @@ g4 <- ggplot(dados2)+##2
   theme(legend.position = "bottom", legend.direction = "horizontal")
 
 g4
-
-
-################
-##TRANSPOR
-g6 <- ggplot(data = dados1)+###3
-  aes(x = Idade) +
-  geom_density(fill = "orange") +
-  ylab("Densidade") +
-  facet_grid(facets = inadimplencia ~ `Sexo/estado.civil`) +
-  theme_bw()
-g6
 ########
 library(tidyverse)
 
@@ -240,7 +230,82 @@ dados2<-dados2 %>%separate(`Sexo/estado.civil`,into = c("Sexo","Estado civil"),s
 
 library(ggthemes)
 
-ggplot(dados2,aes(fill=dados2$Sexo,x=dados2$inadimplencia))+geom_bar(position = "dodge")
+
+
+
+################
+
+
+dadosnumericos<-dados2[,c(2,5,8,12,14,17,19,21,22)]
+
+dadosnumericos$inadimplencia<-str_replace_all(dadosnumericos$inadimplencia,"bom pagador","1")
+dadosnumericos$inadimplencia<-str_replace_all(dadosnumericos$inadimplencia,"mau pagador","0")
+dadosnumericos$inadimplencia<-as.numeric(dadosnumericos$inadimplencia)
+dadosnumericos$Trabalhador.estrangeiro<-if_else(dadosnumericos$Trabalhador.estrangeiro=="sim",1,0)
+library(corrplot)
+corrplot(cor(dadosnumericos), method = "number",type="upper", tl.col="gray30", tl.srt = 30, diag=FALSE)
+
+#summary dos nao inadiplentes e inadiplemntes
+dadosninadimpl<-dados2 %>% filter(inadimplencia=="bom pagador")
+
+dadosinadimpl<-dados2 %>% filter(inadimplencia=="mau pagador")
+
+summary(dadosinadimpl)
+summary(dadosninadimpl)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
