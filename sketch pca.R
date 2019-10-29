@@ -23,6 +23,7 @@ colnames(reorder)[,8] <- "Pais"
 
 
 require(graphics)
+
 ## the variances of the variables in the
 prcomp(reords[,c(1,2,3,4,5,6,7)],scale. = T)
 summary(prcomp(reords[,c(1,2,3,4,5,6,7)],scale. = T)) # inappropriate
@@ -39,6 +40,7 @@ colnames(reords) <- c("sp100","sp200","sp400","sp800","sp1500","sp3000","maratho
 
 summary(prcomp(reords[,c(1:7)], scale = TRUE))
 
+biplot(prcomp(reords[,1:7]),scale = T)
 
 
 
