@@ -2,7 +2,7 @@ library(tidyverse)
 #install.packages("tidyverse")
 library(readxl)
 #install.packages("readxl")
-reords <- read.csv2(file = "Track Records For Women.csv",header=F)
+reords <- read.csv2(file = "Track Records For Women.csv",header=F,dec='.')
 reords
 
 str(reords)
