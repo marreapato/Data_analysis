@@ -1,46 +1,39 @@
+#importing .sav archive
+library(foreign)
+food <- read.spss("Alimentos.sav")
+food <- as.data.frame(food)
+
+#loading some packages
 library(tidyverse)
 #install.packages("tidyverse")
-library(readxl)
-#install.packages("readxl")
-reords <- read.csv2(file = "Track Records For Women.csv",header=F,dec='.')
-reords
+summary(food)
 
-str(reords)
+require(graphics)#pca graphics package
 
-#names(reords)[names(reords)=="argentin"] <- "pais"
+library(RColorBrewer)#color pallete
 
-summary(reords)
+#first collumn as row names
 
-records <- as.tibble(reords)
+rownames(food) <- food[,1]
 
-reords[,c(7)] <- as.numeric(reords[,c(7)])
-
-head(records)
-reords <- as.data.frame(reords)
-record <- as.numeric(reords[,1])
-reords
-colnames(reorder)[,8] <- "Pais"
-
-
-require(graphics)
+food <- food[,-1]
 
 ## the variances of the variables in the
-prcomp(reords[,c(1,2,3,4,5,6,7)],scale. = T)
-summary(prcomp(reords[,c(1,2,3,4,5,6,7)],scale. = T)) # inappropriate
 
-biplot(prcomp(reords[,1:7], scale = T))
-?biplot
+prcomp(food,scale= T)
+
+summary(prcomp(food,scale=T)) # inappropriate
+?brewer.pal
+biplot(prcomp(food),scale=T)
+
+#?biplot
 #install.packages("ggfortify")
 #library(ggfortify)
 
-cor(reords[,1:7])
+cor(food)
 
-row.names(reords) <- reords$V8
-colnames(reords) <- c("sp100","sp200","sp400","sp800","sp1500","sp3000","marathon")
+#cluster analysis
 
-summary(prcomp(reords[,c(1:7)], scale = TRUE))
-
-biplot(prcomp(reords[,1:7]),scale = T)
 
 
 
