@@ -1,7 +1,7 @@
 #importing .sav archive
 library(foreign)
 food <- read.spss("Alimentos.sav")
-food <- as.data.frame(food)
+food<- as.data.frame(food)
 
 #loading some packages
 library(tidyverse)
@@ -9,8 +9,6 @@ library(tidyverse)
 summary(food)
 
 require(graphics)#pca graphics package
-
-library(RColorBrewer)#color pallete
 
 #first collumn as row names
 
@@ -34,8 +32,16 @@ cor(food)
 
 #cluster analysis
 
+foodstandard <- scale(food)
 
+#getting k-nearest neighbours
 
+kmeansget <- kmeans(food,3)
+attributes(kmeansget)
 
-
+library(cluster)
+clusplot(foodstandard, kmeansget$cluster, main='Cluster dos alimentos',
+         color=TRUE, shade=TRUE,
+         labels=2, lines=0,xlab = "Componente 1",ylab = "Componente 2",subtitle="Esses dois componentes explicam 73,55% do ponto de variação")
+?plot
 
