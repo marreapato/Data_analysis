@@ -16,7 +16,7 @@ rownames(food) <- food[,1]
 
 food <- food[,-1]
 
-t.test(food$Proteínas_g)
+t.test(food$ProteÃ­nas_g)
 t.test(food$Energia_kcal)
 
 ## the variances of the variables in the
@@ -32,8 +32,8 @@ biplot(prcomp(food),scale=T)
 #library(ggfortify)
 #correlation tests
 cor(food)
-cor.test(food$Energia_kcal,food$Lípidos_g)
-cor.test(food$Cálcio_mg,food$Proteínas_g)
+cor.test(food$Energia_kcal,food$LÃ­pidos_g)
+cor.test(food$CÃ¡lcio_mg,food$ProteÃ­nas_g)
 #cluster analysis
 
 foodstandard <- scale(food)
@@ -46,6 +46,6 @@ attributes(kmeansget)
 library(cluster)
 clusplot(foodstandard, kmeansget$cluster, main='Cluster dos alimentos',
          color=TRUE, shade=TRUE,
-         labels=2, lines=0,xlab = "Componente 1",ylab = "Componente 2",subtitle="Esses dois componentes explicam 73,55% do ponto de variação")
+         labels=2, lines=0,xlab = "Componente 1",ylab = "Componente 2")
 ?plot
 
