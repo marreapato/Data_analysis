@@ -1,10 +1,24 @@
 library(tidyverse)
 #summary statistics
+#install.packages("psych")
+#install.packages("pastecs")
+#install.packages("skimr")
+library(psych)
+library(pastecs)
+library(skimr)
 
 attach(terrorism)
 
 summary(terrorism)
 
+#describe(terrorism)
+
 terrorism <- read.csv("Terrorism.csv")
 
+#describing data by region
 
+avgkill=terrorism %>% group_by(region=region_txt) %>%summarise(mean=round( mean(nkill,na.rm = T)),sd=round(sd(nkill,na.rm=T)),quartile3=trunc(quantile(nkill,probs = (0.75),na.rm=T)) )
+avgkill
+#average n of kills per region
+#?quantile()
+statsperp=terrorism %>% group_by(region_txt) %>% summarise(mean=round(mean(nperps,na.rm=T)),sd=round(sd(nperps,na.rm=T)),quartile3=trunc(quantile(nperps,probs = (0.75),na.rm=T)))
