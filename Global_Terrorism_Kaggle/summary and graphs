@@ -1,18 +1,10 @@
 library(tidyverse)
 #summary statistics
-#install.packages("psych")
-#install.packages("pastecs")
-#install.packages("skimr")
-library(psych)
-library(pastecs)
-library(skimr)
 
 attach(terrorism)
 
 summary(terrorism)
 
-#describe(terrorism)
-
 terrorism <- read.csv("Terrorism.csv")
 
-#describing data by region
+
