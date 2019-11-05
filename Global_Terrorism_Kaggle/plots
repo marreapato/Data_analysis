@@ -1,0 +1,40 @@
+library(tidyverse)
+install.packages("tidyverse")
+#summary statistics
+#install.packages("psych")
+#install.packages("pastecs")
+#install.packages("skimr")
+library(psych)
+library(pastecs)
+library(skimr)
+terrorism <- read.csv("Terrorism.csv")
+attach(terrorism)
+
+summary(terrorism)
+
+#describe(terrorism)
+
+#describing data by region
+
+avgkill=terrorism %>% group_by(region=region_txt) %>%summarise(mean=round( mean(nkill,na.rm = T)),sd=round(sd(nkill,na.rm=T)),quartile3=trunc(quantile(nkill,probs = (0.75),na.rm=T)) )
+avgkill
+#average n of kills per region
+#?quantile()
+statsperp=terrorism %>% group_by(region_txt) %>% summarise(mean=round(mean(nperps,na.rm=T)),sd=round(sd(nperps,na.rm=T)),quartile3=trunc(quantile(nperps,probs = (0.75),na.rm=T)))
+statsperp
+
+propextreg<-terrorism[,c(20,5)]
+
+library(ggthemes)
+detach(terrorism)
+propextreg1 <-propextreg %>%  filter(propextent_txt=="Minor (likely < $1 million)")
+propextreg2 <-propextreg %>%  filter(propextent_txt=="Major (likely >= $1 million but < $1 billion)")
+propextreg3 <-propextreg %>%  filter(propextent_txt=="Catastrophic (likely >= $1 billion)")
+
+g1=ggplot(na.omit(propextreg1),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()
+g2=ggplot(na.omit(propextreg2),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+them
+g3=ggplot(na.omit(propextreg3),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")
+
+library(gridExtra)
+grid.arrange(g1, g2, ncol=2)
+g3
