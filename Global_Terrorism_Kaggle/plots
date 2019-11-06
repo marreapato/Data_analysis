@@ -1,12 +1,12 @@
 library(tidyverse)
-install.packages("tidyverse")
+#install.packages("tidyverse")
 #summary statistics
 #install.packages("psych")
 #install.packages("pastecs")
 #install.packages("skimr")
-library(psych)
-library(pastecs)
-library(skimr)
+#library(psych)
+#library(pastecs)
+#library(skimr)
 terrorism <- read.csv("Terrorism.csv")
 attach(terrorism)
 
@@ -27,14 +27,21 @@ propextreg<-terrorism[,c(20,5)]
 
 library(ggthemes)
 detach(terrorism)
+
+#damage barplot
 propextreg1 <-propextreg %>%  filter(propextent_txt=="Minor (likely < $1 million)")
 propextreg2 <-propextreg %>%  filter(propextent_txt=="Major (likely >= $1 million but < $1 billion)")
 propextreg3 <-propextreg %>%  filter(propextent_txt=="Catastrophic (likely >= $1 billion)")
 
-g1=ggplot(na.omit(propextreg1),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()
-g2=ggplot(na.omit(propextreg2),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+them
-g3=ggplot(na.omit(propextreg3),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")
-
+g1=ggplot(na.omit(propextreg1),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()+theme(legend.position = "none")
+g2=ggplot(na.omit(propextreg2),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()
+g3=ggplot(na.omit(propextreg3),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()
+#plotting with opnly one legend
+#install.packages("digest")
+library(digest)
 library(gridExtra)
-grid.arrange(g1, g2, ncol=2)
+grid.arrange(g1, g2,g3, ncol=2)#i'm gonna see what to do here now,
+#in order to be able to change the third plot
+
 g3
+#cor.test(terrorism$propvalue,terrorism$nkill)#correlation matrix
