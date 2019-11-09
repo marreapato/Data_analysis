@@ -1,5 +1,5 @@
 library(tidyverse)
-#install.packages("tidyverse")
+  #install.packages("tidyverse")
 #summary statistics
 #install.packages("psych")
 #install.packages("pastecs")
@@ -32,10 +32,10 @@ detach(terrorism)
 propextreg1 <-propextreg %>%  filter(propextent_txt=="Minor (likely < $1 million)")
 propextreg2 <-propextreg %>%  filter(propextent_txt=="Major (likely >= $1 million but < $1 billion)")
 propextreg3 <-propextreg %>%  filter(propextent_txt=="Catastrophic (likely >= $1 billion)")
-
-g1=ggplot(na.omit(propextreg1),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()+theme(legend.position = "none")
-g2=ggplot(na.omit(propextreg2),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()
-g3=ggplot(na.omit(propextreg3),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_tufte()
+?theme()
+g1=ggplot(na.omit(propextreg1),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_few()+theme(legend.position = "none")+scale_fill_ptol()+labs(y="Frequency",title = "Damage caused per region",x="Regiões",fill="Regiões")
+g2=ggplot(na.omit(propextreg2),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+theme_few()+scale_fill_ptol()+labs(y="Frequency",title="Damage caused per region",x="Regions",fill="Region")
+g3=ggplot(na.omit(propextreg3),aes(propextent_txt,fill=region_txt))+geom_bar(position = "dodge")+scale_fill_ptol()+theme_few()+labs(y="Frequency",title="Damage caused per region",x="Regions",fill="Region")
 #plotting with opnly one legend
 #install.packages("digest")
 library(digest)
@@ -44,4 +44,36 @@ grid.arrange(g1, g2,g3, ncol=2)#i'm gonna see what to do here now,
 #in order to be able to change the third plot
 
 g3
-#cor.test(terrorism$propvalue,terrorism$nkill)#correlation matrix
+#install.packages("devtools")
+library(devtools)
+
+
+world <-map_data('world') %>% filter(region != "Antarctica") %>% fortify
+ map_data("world") # we already did this, but we can do it again
+
+ggplot(world, aes(x=long, y=lat, group=group)) +
+  geom_polygon(fill="grey", colour="black",show.legend = T)+
+  geom_point(data=terrorism, aes(y=terrorism$latitude, x=terrorism$longitude, colour=terrorism$region_txt, group=terrorism$region_txt,
+                         size=terrorism$nkill))+
+  labs(colour="Region",size="Number of deaths")+
+  geom_path() + coord_map("mercator")+theme_map()
+#install.packages("leaflet")
+  terr <- na.omit(terrorism)
+  sum(is.na(terrorism)==F)
+  cont=0
+  
+  
+  
+  #could be useful to make ml model later
+  for(i in 1:24){
+    
+  if(sum(is.na(terrorism[,i]))>4557){
+    terror <- terrorism[,-i]
+  }
+  
+    }
+  
+terror <- terror[,c(23,22,19,5)]
+terror <- na.omit(terror)  
+
+   
