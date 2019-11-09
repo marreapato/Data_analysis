@@ -71,4 +71,10 @@ ggplot(westeurt,aes(x=reorder(westeurt$Var1,Freq),y=Freq,fill=westeurt$Freq))+ge
 # geom_text(stat='count',vjust=0.5, position = position_dodge(width = .9),aes(label=paste0(round(..count../sum(..count..)*100, 1), 
 "%")))      
 
+cor.test(northam$nkill,northam$propvalue)#in north america
 
+northcheck <- cbind(northam$nkill,northam$propvalue)
+
+northcheck <- na.omit(northcheck)
+
+northcheck <- as.data.frame(northcheck)
