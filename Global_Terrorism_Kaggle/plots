@@ -9,18 +9,19 @@ library(tidyverse)
 #library(skimr)
 terrorism <- read.csv("Terrorism.csv")
 attach(terrorism)
-
+table(terrorism$region_txt)
 summary(terrorism)
 
 #describe(terrorism)
-
+ggplot(data = terrorism, aes(x = iyear, y = nkill,color=region_txt))+
+  geom_line()
 #describing data by region
 
 avgkill=terrorism %>% group_by(region=region_txt) %>%summarise(mean=round( mean(nkill,na.rm = T)),sd=round(sd(nkill,na.rm=T)),quartile3=trunc(quantile(nkill,probs = (0.75),na.rm=T)) )
 avgkill
 #average n of kills per region
 #?quantile()
-statsperp=terrorism %>% group_by(region_txt) %>% summarise(mean=round(mean(nperps,na.rm=T)),sd=round(sd(nperps,na.rm=T)),quartile3=trunc(quantile(nperps,probs = (0.75),na.rm=T)))
+statsperp=terrorism %>% group_by(region_txt) %>% summarise(mean=round(mean(nperps,na.rm=T)),sd=round(sd(nperps,na.rm=T)),quartile3=trunc(median(nperps,na.rm=T)))
 statsperp
 
 propextreg<-terrorism[,c(20,5)]
@@ -67,7 +68,7 @@ ggplot(nort,aes(x=reorder(nort$Var1,Freq),y=Freq,fill=nort$Freq))+geom_col()+coo
 # geom_text(stat='count',vjust=0.5, position = position_dodge(width = .9),aes(label=paste0(round(..count../sum(..count..)*100, 1), 
 "%")))      
                                                                                            "%")))      
-ggplot(westeurt,aes(x=reorder(westeurt$Var1,Freq),y=Freq,fill=westeurt$Freq))+geom_col()+coord_flip()+geom_text(aes(label=Freq),vjust=-0.1)+labs(y="Frequency",x="Countries",fill="Frequency",title="European countries")+theme_fivethirtyeight()#+
+ggplot(westeurt,aes(x=reorder(westeurt$Var1,Freq),y=Freq,fill=westeurt$Freq))+geom_col()+coord_flip()+geom_text(aes(label=Freq),vjust=-0.1)+labs(y="Frequency",x="Countries",fill="Frequency",title="European countries")+theme_fivethirtyeight()+theme(legend.position = "none")#+
 # geom_text(stat='count',vjust=0.5, position = position_dodge(width = .9),aes(label=paste0(round(..count../sum(..count..)*100, 1), 
 "%")))      
 
