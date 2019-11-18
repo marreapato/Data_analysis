@@ -43,7 +43,7 @@ v<-sort(rowSums(m),decreasing = T)
 diagn<-data.frame(word=names(v),freq=v)
 
 #wordcloud for now
-listaword[[i]]=wordcloud(words=diagn$word,freq=diagn$freq,min.freq = 100,colors=brewer.pal(8,"Dark2"),max.words = 64,random.color = T,,rot.per = 0.2,random.order = F,scale = c(7,0.7))
+wordcloud(words=diagn$word,freq=diagn$freq,min.freq = 100,colors=brewer.pal(8,"Dark2"),max.words = 64,random.color = T,,rot.per = 0.2,random.order = F,scale = c(7,0.7))
 
 }
 #rot.per rotate the words, scale goes to the maximum at x-axis and minor in y-axis
