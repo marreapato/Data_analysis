@@ -53,8 +53,8 @@ wordcloud(words=diagn$word,freq=diagn$freq,min.freq = 100,colors=brewer.pal(8,"D
 #listaperiodos=list()
 #listaperiodos$until90 <-terrorism %>%  filter(iyear<=1990)
 #listaperiodos$until210 <- terrorism %>% filter(iyear>1990&iyear<=2010)
-#listaperiodos$untl217 <- terrorism %>% filter(iyear>2010&iyear<=2017)
+#listaperiodos$untl217 <- terrorism %>% filter(iyear>2010)
 
 #write.csv(listaperiodos$until90$country_txt,file="terror90.csv",row.names = F)
 #write.csv(listaperiodos$until210$country_txt,file="terror2010.csv",row.names = F)
-#write.csv(listaperiodos$until217$country_txt,file="terror2017.csv",row.names = F)
+#write.csv(listaperiodos$untl217$country_txt,file="terror2017.csv",row.names = F)
