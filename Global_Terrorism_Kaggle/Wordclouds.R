@@ -58,3 +58,9 @@ wordcloud(words=diagn$word,freq=diagn$freq,min.freq = 100,colors=brewer.pal(8,"D
 #write.csv(listaperiodos$until90$country_txt,file="terror90.csv",row.names = F)
 #write.csv(listaperiodos$until210$country_txt,file="terror2010.csv",row.names = F)
 #write.csv(listaperiodos$untl217$country_txt,file="terror2017.csv",row.names = F)
+listab=list()
+for(i in 1:12){
+listab[[i]]=table(as.character(listaregion[[i]]$country_txt))
+}
+names(listab)=names(listaregion)#names
+
