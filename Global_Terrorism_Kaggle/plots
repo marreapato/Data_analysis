@@ -79,3 +79,12 @@ northcheck <- cbind(northam$nkill,northam$propvalue)
 northcheck <- na.omit(northcheck)
 
 northcheck <- as.data.frame(northcheck)
+
+library(ggthemes)
+
+terrorgrup <- as.data.frame(table(terrorism$gname))
+terrog <-terrorgrup %>%  filter(Freq>=3000)
+terrog
+
+ggplot(terrog,aes(x=reorder(terrog$Var1,-Freq),y=Freq,fill=Var1))+geom_col()+theme_fivethirtyeight()+scale_fill_tableau()+theme(legend.position = "none")+
+  labs(y="Frequency",title = "Groups with more than 3000 attacks registred",x="Groups")+geom_text(aes(label=Freq),vjust=-0.1) +coord_flip()
