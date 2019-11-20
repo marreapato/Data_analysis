@@ -8,12 +8,12 @@ library(pastecs)
 library(skimr)
 
 attach(terrorism)
-
+terrorism <- read.csv("Terrorism.csv")
 summary(terrorism)
 
 #describe(terrorism)
 
-terrorism <- read.csv("Terrorism.csv")
+
 
 #describing data by region
 
@@ -24,5 +24,11 @@ ggplot(sumkill,aes(x=reorder(sumkill$region,-sumkill$`sum(nkill, na.rm = T)`),y=
 
 
 #n of kills per region
-#?quantile()
-statsperp=terrorism %>% group_by(region_txt) %>% summarise(mean=round(mean(nperps,na.rm=T)),sd=round(sd(nperps,na.rm=T)),quartile3=trunc(quantile(nperps,probs = (0.75),na.rm=T)))
+
+
+#terrorist groups in iraq
+iraqt <- terrorism %>% filter(country_txt=="Iraq")
+terroiraq <- as.data.frame(table(iraqt$gname)) %>% filter(Freq>0)
+
+menor <- terrorism %>% filter(terrorism$iyear<1990)
+                           
