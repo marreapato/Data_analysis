@@ -26,6 +26,13 @@ ggplot(sumkill,aes(x=reorder(sumkill$region,-sumkill$`sum(nkill, na.rm = T)`),y=
 #n of kills per region
 killregion <- as.data.frame(sumkill)
 population <- c()#source:https://www.worldometers.info/
+#deaths per terrorist attack per region
+freqregion<-as.data.frame(table(terrorism$region_txt))
+killregion <- as.data.frame(sumkill)
+regionocurr <- cbind(sumkill,Attacks=freqregion$Freq)
+population <- c()#source:https://www.worldometers.info/
+
+regionocurr <- regionocurr %>% mutate(deathperat=(Deaths/Attacks))
 
 #terrorist groups in iraq
 iraqt <- terrorism %>% filter(country_txt=="Iraq")
