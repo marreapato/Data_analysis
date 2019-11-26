@@ -17,12 +17,12 @@ summary(terrorism)
 
 #describing data by region
 
-sumkill=terrorism %>% group_by(region=region_txt) %>%summarise(sum(nkill,na.rm = T))
+sumkill=terrorism %>% group_by("Region"=region_txt) %>%summarise(Deaths=sum(nkill,na.rm = T))
 library(ggthemes)
 ggplot(sumkill,aes(x=reorder(sumkill$region,-sumkill$`sum(nkill, na.rm = T)`),y=sumkill$`sum(nkill, na.rm = T)`,fill=region))+geom_col()+theme_fivethirtyeight()+scale_fill_ptol()+theme(legend.position = "none")+
   labs(y="Frequency",title = "Number of kills per region from 1970 to 2017",x="Regions")+geom_text(aes(label=sumkill$`sum(nkill, na.rm = T)`),vjust=-0.1) +coord_flip() 
 
-
+killregion <- as.data.frame(sumkill)
 #n of kills per region
 
 
@@ -31,4 +31,3 @@ iraqt <- terrorism %>% filter(country_txt=="Iraq")
 terroiraq <- as.data.frame(table(iraqt$gname)) %>% filter(Freq>0)
 
 menor <- terrorism %>% filter(terrorism$iyear<1990)
-                           
