@@ -40,3 +40,8 @@ popkill17 <- cbind(sumkill17,population=pop17)
 popkill90 <- popkill90 %>% mutate("Kills per million"=(Deaths/population)*1000000)
 popkill10 <- popkill10 %>% mutate("Kills per million"=(Deaths/population)*1000000)
 popkill17 <- popkill17 %>% mutate("Kills per million"=(Deaths/population)*1000000)
+
+popkill90$`Kills per million` <- round(popkill90$`Kills per million`,digits = 2)
+popkill10$`Kills per million` <- round(popkill10$`Kills per million`,digits = 2)
+popkill17$`Kills per million`<- round(popkill17$`Kills per million`,digits = 2)
+
